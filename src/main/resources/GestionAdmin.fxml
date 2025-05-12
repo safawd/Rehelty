@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="/Adminstyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.GestionAdmin">
+    <children>
+        <!-- Header -->
+        <HBox prefHeight="60.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <Label styleClass="logo" text="Admin" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button styleClass="profile-button" text="Profile" />
+            </children>
+            <padding>
+                <Insets bottom="10" left="20" right="20" top="10" />
+            </padding>
+        </HBox>
+
+        <!-- Sidebar -->
+        <VBox fx:id="sidebar" prefWidth="200.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="60.0">
+            <children>
+                <HBox alignment="CENTER_RIGHT">
+                    <Button fx:id="toggleSidebarButton" styleClass="toggle-button" text="☰" />
+                </HBox>
+                <Label styleClass="sidebar-title" text="Admin Panel" />
+                <Separator styleClass="sidebar-separator" />
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+                    <Label styleClass="sidebar-icon" text="📊">
+                  <font>
+                     <Font size="19.0" />
+                  </font></Label>
+                    <Button onAction="#refreshStats" styleClass="sidebar-button" text="Dashboard" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+                    <Label styleClass="sidebar-icon" text="➕">
+                  <font>
+                     <Font size="17.0" />
+                  </font></Label>
+                    <Button onAction="#adminAddPerson" styleClass="sidebar-button" text="Ajouter" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+                    <Label styleClass="sidebar-icon" text="✏️">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Label>
+                    <Button onAction="#adminEditPerson" styleClass="sidebar-button" text="Modifier" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+                    <Label styleClass="sidebar-icon" text="🗑️">
+                  <font>
+                     <Font size="21.0" />
+                  </font></Label>
+                    <Button onAction="#adminDeletePerson" styleClass="sidebar-button" text="Supprimer" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+                    <Label styleClass="sidebar-icon" text="🚪">
+                  <font>
+                     <Font size="22.0" />
+                  </font></Label>
+                    <Button onAction="#logout" styleClass="sidebar-button" text="Sortir" />
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20" left="10" right="10" top="20" />
+            </padding>
+        </VBox>
+
+        <!-- Main Content -->
+        <AnchorPane fx:id="mainContent" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="60.0">
+            <children>
+                <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <content>
+                        <VBox spacing="40" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+                            <Label styleClass="title" text="Admin Dashboard" />
+
+                            <!-- Stats Grid -->
+                            <GridPane alignment="CENTER" hgap="40" vgap="40">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="30" />
+                                    <ColumnConstraints percentWidth="30" />
+                                    <ColumnConstraints percentWidth="30" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints vgrow="ALWAYS" />
+                                    <RowConstraints vgrow="ALWAYS" />
+                                </rowConstraints>
+
+                                <!-- Number of People -->
+                                <VBox fx:id="statBoxPeople" styleClass="stat-box" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="👥" />
+                                        <Label styleClass="stat-title" text="Number of People" />
+                                        <Label fx:id="lblTotalPeople" styleClass="stat-value" text="0" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Number of Deleted Accounts -->
+                                <VBox fx:id="statBoxDeleted" styleClass="stat-box" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="🚫" />
+                                        <Label styleClass="stat-title" text="Deleted Accounts" />
+                                        <Label fx:id="lblDeletedAccounts" styleClass="stat-value" text="0" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Number of Hotels -->
+                                <VBox fx:id="statBoxHotels" styleClass="stat-box" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="🏨" />
+                                        <Label styleClass="stat-title" text="Number of Hotels" />
+                                        <Label fx:id="lblTotalHotels" styleClass="stat-value" text="0" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Total Google Users -->
+                                <VBox fx:id="statBoxGoogleUsers" styleClass="stat-box" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="🌐" />
+                                        <Label styleClass="stat-title" text="Google Users" />
+                                        <Label fx:id="lblGoogleUsers" styleClass="stat-value" text="0" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Recently Added Users -->
+                                <VBox fx:id="statBoxRecentUsers" styleClass="stat-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="➕" />
+                                        <Label styleClass="stat-title" text="Recently Added Users" />
+                                        <Label fx:id="lblRecentUsers" styleClass="stat-value" text="0" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Total Payments -->
+                                <VBox fx:id="statBoxPayments" styleClass="stat-box" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <children>
+                                        <Label styleClass="stat-icon" text="💰" />
+                                        <Label styleClass="stat-title" text="Total Payments" />
+                                        <Label fx:id="lblTotalPayments" styleClass="stat-value" text="" />
+                                    </children>
+                                </VBox>
+                            </GridPane>
+
+                            <!-- Action Buttons -->
+                            <HBox alignment="CENTER" spacing="20">
+                                <Button onAction="#adminAddPerson" styleClass="action-button" text="Ajout Personne" />
+                                <Button onAction="#adminEditPerson" styleClass="action-button" text="Modifier Personne" />
+                                <Button onAction="#adminDeletePerson" styleClass="action-button" text="Supprimer Personne" />
+                            </HBox>
+
+                            <!-- Search and People Grid -->
+                            <VBox spacing="20">
+                                <TextField fx:id="searchField" onKeyTyped="#handleSearchInput" promptText="Search by ID..." styleClass="search-field" />
+                                <VBox fx:id="personCardContainer" alignment="CENTER" spacing="10" styleClass="card-container" />
+                                <Label fx:id="searchStatusLabel" styleClass="message-label" text="" />
+                                <ScrollPane fx:id="peopleScrollPane" visible="false" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                                    <content>
+                                        <GridPane fx:id="peopleGrid" alignment="CENTER" hgap="20" vgap="20">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="30" />
+                                                <ColumnConstraints percentWidth="30" />
+                                                <ColumnConstraints percentWidth="30" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                    </content>
+                                </ScrollPane>
+                            </VBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

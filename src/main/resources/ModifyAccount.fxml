@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" stylesheets="@ModifyAccount.css"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.ModifyAccount">
+
+    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" />
+    <Button text="Changer Photo" onAction="#changeProfilePhoto" />
+    <TextField fx:id="nomField" promptText="Nom" />
+    <TextField fx:id="prenomField" promptText="Prénom" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <TextField fx:id="paysField" promptText="Pays" />
+
+    <Button text="Voir Carte de Fidélité" onAction="#generateLoyaltyCard"/>
+    <Button text="Enregistrer" onAction="#saveChanges"/>
+</VBox>

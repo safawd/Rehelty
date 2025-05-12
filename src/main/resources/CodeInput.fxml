@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="350" prefHeight="200"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.CodeInputController">
+    <children>
+        <VBox alignment="CENTER" spacing="15" AnchorPane.leftAnchor="20"
+              AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+            <Label text="Collez le code d’autorisation Google :" />
+            <TextField fx:id="tfCode" promptText="Ex. 4/0Af1..." />
+            <Button text="Valider" onAction="#onValidate"
+                    prefWidth="120"
+                    style="-fx-background-color: #1242A1; -fx-text-fill: white;"/>
+            <Label fx:id="lblError" textFill="red" />
+        </VBox>
+    </children>
+</AnchorPane>

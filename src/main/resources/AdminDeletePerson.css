@@ -1,0 +1,144 @@
+/* Root styles for the AnchorPane */
+AnchorPane {
+    -fx-background-color: #F8F9FA;
+}
+
+/* VBox container */
+VBox {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DEE2E6;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+/* Title */
+.title {
+    -fx-font-family: "Arial";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343A40;
+    -fx-alignment: center;
+}
+
+/* Form labels */
+.form-label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #495057;
+}
+
+/* Form fields (TextField) */
+.form-field {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CED4DA;
+    -fx-border-radius: 4px;
+    -fx-padding: 8px;
+    -fx-pref-width: 200px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+.form-field:focused {
+    -fx-border-color: #007BFF;
+    -fx-border-width: 2px;
+}
+
+/* Person card */
+.person-card {
+    -fx-background-color: #FFF3F3;
+    -fx-border-color: #DC3545;
+    -fx-border-radius: 4px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Person labels in card */
+.person-label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #343A40;
+}
+
+/* Search button */
+.search-button {
+    -fx-background-color: #007BFF;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.search-button:hover {
+    -fx-background-color: #0056B3;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Delete button */
+.delete-button {
+    -fx-background-color: #DC3545;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.delete-button:hover {
+    -fx-background-color: #C82333;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Cancel button */
+.cancel-button {
+    -fx-background-color: #6C757D;
+    -fx-text-fill: personally;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.cancel-button:hover {
+    -fx-background-color: #5A6268;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Message label */
+.message-label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #6C757D;
+    -fx-alignment: center;
+}
+
+/* Success message (applied via setStyle in controller) */
+.success-message {
+    -fx-text-fill: #28A745;
+    -fx-font-weight: bold;
+}
+
+/* Error message (applied via setStyle in controller) */
+.error-message {
+    -fx-text-fill: #DC3545;
+    -fx-font-weight: bold;
+}

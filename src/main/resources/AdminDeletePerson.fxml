@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminDeletePersonController" stylesheets="/AdminDeletePerson.css">
+    <children>
+        <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+            <children>
+                <Label text="Delete Person" styleClass="title" />
+
+                <!-- Search Bar -->
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="Search by ID:" styleClass="form-label" />
+                    <TextField fx:id="searchField" styleClass="form-field" promptText="Enter Person ID" />
+                    <Button fx:id="searchButton" text="Search" styleClass="search-button" onAction="#searchPerson" />
+                </HBox>
+
+                <!-- Person Card (Initially Hidden) -->
+                <VBox fx:id="personCard" styleClass="person-card" visible="false" spacing="10">
+                    <Label fx:id="nameLabel" styleClass="person-label" />
+                    <Label fx:id="emailLabel" styleClass="person-label" />
+                    <Label fx:id="countryLabel" styleClass="person-label" />
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER" spacing="20">
+                    <Button fx:id="deleteButton" text="Delete" styleClass="delete-button" onAction="#adminDelete" visible="false" />
+                    <Button fx:id="backButton" text="Cancel" styleClass="cancel-button" onAction="#goBack" />
+                </HBox>
+
+                <!-- Error/Success Message -->
+                <Label fx:id="statusLabel" text="" styleClass="message-label" />
+            </children>
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

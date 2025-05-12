@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" stylesheets="@LoyaltyCard.css"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.LoyaltyCard">
+
+    <Label text="Carte de Fidélité" styleClass="title"/>
+    <ImageView fx:id="photoProfil" fitHeight="80" fitWidth="80"/>
+    <Label fx:id="nomLabel"/>
+    <Label fx:id="prenomLabel"/>
+    <Label fx:id="paysLabel"/>
+    <ImageView fx:id="barcodeImage" fitHeight="50" fitWidth="150"/>
+</VBox>
+

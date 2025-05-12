@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.GestionLogin"   stylesheets="/Login.css">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: #1242A1;">
+            <children>
+                <VBox alignment="CENTER" layoutX="70.0" layoutY="150.0" prefHeight="300.0" prefWidth="310.0">
+                    <children>
+                        <ImageView fx:id="logoImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="20.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Label text="BIENVENUE SUR" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="REHELTY" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="20.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="100.0" prefWidth="300.0" text="Votre partenaire de voyage de confiance " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <AnchorPane layoutX="350.0" layoutY="50.0" prefHeight="500.0" prefWidth="100.0" style="-fx-background-radius: 100 0 0 100; -fx-background-color: white;" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="450.0" prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: white;">
+            <children>
+                <VBox alignment="CENTER" layoutX="70.0" layoutY="150.0" prefHeight="300.0" prefWidth="310.0">
+                    <children>
+                        <Label text="Connexion" textFill="#1242a1">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="30.0" />
+                            </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 5;">
+                            <children>
+                                <Label text="📧" />
+                                <TextField fx:id="tfEmail" promptText="Adresse email" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </TextField>
+                            </children>
+                            <padding>
+                                <Insets left="10.0" right="10.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 5;">
+                            <children>
+                                <Label text="🔒" />
+                                <PasswordField fx:id="pfPassword" promptText="Mot de passe" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </PasswordField>
+                                <Button fx:id="btnShowPassword" mnemonicParsing="false" onAction="#onShowPassword" style="-fx-background-color: transparent;" text="Afficher" textFill="#1242a1" />
+                            </children>
+                            <padding>
+                                <Insets left="10.0" right="10.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                            <children>
+                                <CheckBox fx:id="cbRememberMe" mnemonicParsing="false" text="Se souvenir de moi" />
+                                <Hyperlink fx:id="forgotPasswordLink" onAction="#onForgotPassword" text="Mot de passe oublié ?" textFill="#1242a1" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets left="30.0" />
+                                    </HBox.margin>
+                                </Hyperlink>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="20.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#onLogin" prefHeight="40.0" prefWidth="310.0" style="-fx-background-color: #1242A1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0">
+                            <children>
+                                <Label text="OU" textFill="#a1a1a1" />
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <Button fx:id="btnGoogleLogin" mnemonicParsing="false" onAction="#onGoogleLogin" prefHeight="40.0" prefWidth="310.0" style="-fx-background-color: white; -fx-border-color: #1242A1; -fx-border-radius: 5; -fx-background-radius: 5;" text="Se connecter avec Google" textFill="#1242a1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/images/Logo.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                            <children>
+                                <Label text="Vous n'avez pas de compte ?" />
+                                <Hyperlink fx:id="signupLink" onAction="#onSignupLink" text="S'inscrire" textFill="#1242a1" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

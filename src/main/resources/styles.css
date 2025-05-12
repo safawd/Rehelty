@@ -1,0 +1,140 @@
+/* Style général */
+.main-container {
+    -fx-background-color: linear-gradient(to bottom right, #4568dc, #b06ab3);
+    -fx-background-radius: 10;
+}
+
+/* Titre */
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Champs de texte */
+.text-field, .password-field {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-padding: 10 15;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: rgba(70, 90, 150, 0.9);
+    -fx-background-radius: 5;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: white;
+    -fx-padding: 8 15;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* CheckBox */
+.check-box {
+    -fx-text-fill: white;
+}
+
+.check-box .box {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-color: white;
+    -fx-border-radius: 3;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+/* Hyperlink */
+.hyperlink, .login-link {
+    -fx-text-fill: #FFEB3B;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.hyperlink:hover, .login-link:hover {
+    -fx-text-fill: #FFF176;
+    -fx-underline: true;
+}
+
+/* Message d'erreur */
+.error-label {
+    -fx-text-fill: #FFAB91;
+    -fx-font-size: 12px;
+}
+
+/* Bouton d'inscription */
+.signup-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 30;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.signup-button:hover {
+    -fx-background-color: #66BB6A;
+}
+
+.signup-button:pressed {
+    -fx-background-color: #43A047;
+}
+
+/* Bouton d'authentification Google */
+.google-button {
+    -fx-background-radius: 5;
+    -fx-padding: 10 15 10 45; /* Padding supplémentaire à gauche pour l'icône */
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-min-width: 200;
+    -fx-background-color: white;
+    -fx-text-fill: #757575;
+    -fx-background-image: url('/images/google-icon.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 15 center;
+    -fx-background-size: 20;
+}
+
+.google-button:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+
+/* Séparateur "Or" */
+.or-label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+

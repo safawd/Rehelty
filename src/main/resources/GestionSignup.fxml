@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefWidth="600" prefHeight="500"
+            styleClass="main-container"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.GestionSignup"  stylesheets="/styles.css">
+
+    <VBox spacing="20" alignment="CENTER" AnchorPane.leftAnchor="50"
+          AnchorPane.rightAnchor="50" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30">
+
+        <!-- Titre -->
+        <Label text="Sign Up" styleClass="title-label"/>
+
+        <HBox spacing="20">
+            <!-- Formulaire principal -->
+            <VBox spacing="15" HBox.hgrow="ALWAYS">
+                <!-- Nom complet -->
+                <HBox spacing="10">
+                    <TextField fx:id="tfNom" promptText="Nom" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="tfPrenom" promptText="Prénom" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <!-- Email -->
+                <TextField fx:id="tfEmail" promptText="Email Address" styleClass="text-field"/>
+
+                <!-- Mot de passe -->
+                <PasswordField fx:id="pfPassword" promptText="Password" styleClass="text-field"/>
+
+                <!-- Confirmation mot de passe -->
+                <PasswordField fx:id="pfConfirmPassword" promptText="Confirm Password" styleClass="text-field"/>
+
+                <!-- Téléphone -->
+                <TextField fx:id="tfTelephone" promptText="Téléphone" styleClass="text-field"/>
+
+                <!-- Pays -->
+                <ComboBox fx:id="cbPays" promptText="Pays" styleClass="combo-box" maxWidth="Infinity"/>
+
+                <!-- Type d'ID et Numéro -->
+                <HBox spacing="10">
+                    <ComboBox fx:id="cbIdType" promptText="Type d'ID" styleClass="combo-box" HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="tfIdNumber" promptText="Numéro d'ID" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <!-- Acceptation des conditions -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="cbAccept" text="J'accepte les" styleClass="check-box"/>
+                    <Hyperlink fx:id="hlReglement" text="conditions d'utilisation" styleClass="hyperlink"/>
+                </HBox>
+
+                <!-- Message d'erreur -->
+                <Label fx:id="lblMessage" styleClass="error-label"/>
+
+                <!-- Bouton d'inscription -->
+                <Button text="Sign Up" onAction="#onSignup" styleClass="signup-button"/>
+
+                <!-- Lien de connexion -->
+                <HBox alignment="CENTER">
+                    <Label text="Already have an account?" />
+                    <Hyperlink text="Log in" onAction="#onLoginLink" styleClass="login-link"/>
+                </HBox>
+            </VBox>
+
+            <!-- Options alternatives de connexion -->
+            <VBox spacing="15" alignment="CENTER" minWidth="200">
+                <Label text="Or" styleClass="or-label"/>
+                <Button fx:id="btnGoogleSignup" onAction="#handleGoogleSignup" text="Sign up with Google" styleClass="google-button"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</AnchorPane>

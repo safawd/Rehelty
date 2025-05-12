@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminEditPersonController" stylesheets="/AdminEditPerson.css">
+    <children>
+        <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+            <children>
+                <Label text="Edit Person" styleClass="title" />
+
+                <!-- Search Bar -->
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="Search by ID:" styleClass="form-label" />
+                    <TextField fx:id="searchField" styleClass="form-field" promptText="Enter Person ID" />
+                    <Button fx:id="searchButton" text="Search" styleClass="search-button" onAction="#searchPerson" />
+                </HBox>
+
+                <!-- Person Card (Initially Hidden) -->
+                <VBox fx:id="personCard" styleClass="person-card" visible="false" spacing="10">
+                    <Label fx:id="nameLabel" styleClass="person-label" />
+                    <Label fx:id="emailLabel" styleClass="person-label" />
+                    <Label fx:id="countryLabel" styleClass="person-label" />
+                </VBox>
+
+                <!-- Edit Form (Initially Hidden) -->
+                <GridPane fx:id="editForm" hgap="10" vgap="10" alignment="CENTER" visible="false">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="30" />
+                        <ColumnConstraints percentWidth="70" />
+                    </columnConstraints>
+
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="form-label" />
+                    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="form-field" promptText="Enter email" />
+
+                    <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="form-label" />
+                    <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="form-field" promptText="Enter name" />
+
+                    <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="form-label" />
+                    <TextField fx:id="prenomField" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="form-field" promptText="Enter first name" />
+
+                    <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="form-label" />
+                    <TextField fx:id="telephoneField" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="form-field" promptText="Enter phone" />
+
+                    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="form-label" />
+                    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="form-field" promptText="Enter password" />
+
+                    <Label text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="form-label" />
+                    <TextField fx:id="paysField" GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="form-field" promptText="Enter country" />
+
+                    <Label text="ID Type:" GridPane.columnIndex="0" GridPane.rowIndex="6" styleClass="form-label" />
+                    <TextField fx:id="idTypeField" GridPane.columnIndex="1" GridPane.rowIndex="6" styleClass="form-field" promptText="Enter ID type" />
+
+                    <Label text="ID Number:" GridPane.columnIndex="0" GridPane.rowIndex="7" styleClass="form-label" />
+                    <TextField fx:id="idNumberField" GridPane.columnIndex="1" GridPane.rowIndex="7" styleClass="form-field" promptText="Enter ID number" />
+
+                    <Label text="Google User:" GridPane.columnIndex="0" GridPane.rowIndex="8" styleClass="form-label" />
+                    <CheckBox fx:id="chkEditGoogleUser" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                    <Label text="Google User ID:" GridPane.columnIndex="0" GridPane.rowIndex="9" styleClass="form-label" />
+                    <TextField fx:id="txtEditGoogleUserId" GridPane.columnIndex="1" GridPane.rowIndex="9" styleClass="form-field" disable="true" />
+                </GridPane>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER" spacing="20">
+                    <Button fx:id="updateButton" text="Save Changes" styleClass="save-button" onAction="#adminEdit" visible="false" />
+                    <Button fx:id="backButton" text="Cancel" styleClass="cancel-button" onAction="#goBack" />
+                </HBox>
+
+                <!-- Error/Success Message -->
+                <Label fx:id="statusLabel" text="" styleClass="message-label" />
+            </children>
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

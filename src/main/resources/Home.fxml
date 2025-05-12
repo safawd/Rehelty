@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.Home"
+            prefWidth="800" prefHeight="600" stylesheets="@Home.css">
+
+    <VBox alignment="TOP_CENTER" spacing="20" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" styleClass="main-container">
+
+        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="header-bar">
+            <ImageView fx:id="profileImage" fitWidth="60" fitHeight="60" preserveRatio="true"/>
+            <Label fx:id="welcomeLabel" styleClass="welcome-label"/>
+            <Button text="Changer Photo" onAction="#onChangePhotoClick"/>
+        </HBox>
+
+        <VBox spacing="20" alignment="CENTER">
+            <Label text="Réservez votre prochaine aventure" styleClass="main-title"/>
+
+            <HBox spacing="10">
+                <Button text="Modifier Profil" onAction="#onEditProfileClick"/>
+                <Button text="Supprimer Compte" onAction="#onDeleteAccountClick"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</AnchorPane>

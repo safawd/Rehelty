@@ -1,0 +1,18 @@
+.main-container {
+    -fx-background-color: #f0f0f0;
+}
+
+.header-bar {
+    -fx-padding: 20;
+    -fx-background-color: #1242A1;
+}
+
+.welcome-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+.main-title {
+    -fx-font-size: 22px;
+    -fx-text-fill: #333;
+}
