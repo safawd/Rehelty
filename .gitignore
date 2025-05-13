@@ -36,3 +36,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignorer les fichiers contenant des secrets
+/credentials.json
+/google_oauth.properties
+src/main/java/tn/esprit/services/GoogleAuthService.java

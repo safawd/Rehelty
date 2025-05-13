@@ -1,7 +1,6 @@
 package tn.esprit.controllers;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -310,4 +309,46 @@ public class GestionAdmin {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private VBox sidebar;
+
+
+    // ... autres variables FXML existantes ...
+
+    private boolean isSidebarExpanded = true;
+
+    @FXML
+    public void toggleSidebar() {
+        isSidebarExpanded = !isSidebarExpanded;
+
+        // Créer une timeline pour l'animation
+        Timeline timeline = new Timeline();
+
+        if (isSidebarExpanded) {
+            // Expansion de la sidebar
+            KeyValue kvSidebar = new KeyValue(sidebar.prefWidthProperty(), 250, Interpolator.EASE_BOTH);
+            KeyFrame kf = new KeyFrame(Duration.millis(300), kvSidebar);
+            timeline.getKeyFrames().add(kf);
+
+            timeline.setOnFinished(e -> {
+                sidebar.getStyleClass().remove("compact");
+                AnchorPane.setLeftAnchor(mainContent, 250.0);
+            });
+        } else {
+            // Réduction de la sidebar
+            sidebar.getStyleClass().add("compact");
+
+            KeyValue kvSidebar = new KeyValue(sidebar.prefWidthProperty(), 70, Interpolator.EASE_BOTH);
+            KeyFrame kf = new KeyFrame(Duration.millis(300), kvSidebar);
+            timeline.getKeyFrames().add(kf);
+
+            timeline.setOnFinished(e -> {
+                AnchorPane.setLeftAnchor(mainContent, 70.0);
+            });
+        }
+
+        timeline.play();
+    }
+
 }

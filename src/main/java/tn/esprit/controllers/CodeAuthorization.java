@@ -132,7 +132,7 @@ public class CodeAuthorization {
 
             // Récupérer le contrôleur de la page d'accueil
             Home controller = loader.getController();
-            controller.setUtilisateur(personne);  // Passer l'utilisateur à la page d'accueil
+            controller.setPersonne(personne);  // Passer l'utilisateur à la page d'accueil
 
             // Créer une nouvelle fenêtre pour afficher la page d'accueil
             Stage homeStage = new Stage();

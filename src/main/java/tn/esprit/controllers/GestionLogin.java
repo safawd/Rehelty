@@ -161,17 +161,18 @@ public class GestionLogin implements Initializable {
                 .thenAccept(googleUser -> {
                     Platform.runLater(() -> {
                         try {
-                            // Vérifier si l'utilisateur existe déjà
-                            Personne existingUser = servicePersonne.findByGoogleId(googleUser.getId());
+                            // Vérifier si l'utilisateur existe déjà dans la base de données
+                            String userEmail = googleUser.getEmail();
+                            Personne existingUser = servicePersonne.findByEmail(userEmail);
 
                             if (existingUser != null) {
                                 // L'utilisateur existe déjà, connectez-le directement
                                 showSuccess("Connexion réussie! Redirection vers l'accueil...");
                                 navigateToHome(event);
                             } else {
-                                // Nouvel utilisateur, rediriger vers la page d'inscription
-                                // avec les informations pré-remplies
-                                navigateToSignup(event, googleUser);
+                                // L'utilisateur n'existe pas, alerte et redirection
+                                showError("L'email associé à ce compte Google n'existe pas dans notre base de données.");
+                                // Optionnel: ajouter un bouton pour rediriger vers l'inscription ou autre action
                             }
                         } catch (Exception e) {
                             showError("Erreur lors de la connexion avec Google: " + e.getMessage());
@@ -187,6 +188,7 @@ public class GestionLogin implements Initializable {
                     return null;
                 });
     }
+
 
     @FXML
     private void onShowPassword(ActionEvent event) {

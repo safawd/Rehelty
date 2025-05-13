@@ -1,12 +1,252 @@
+/* Global Styles */
 .root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #EEF2F7, #E2E7F0);
+    -fx-background-attachment: fixed;
+}
+
+/* Header */
+.header {
+    -fx-background-color: linear-gradient(to right, #1242A1, #1E56B0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 2);
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(255,255,255,0.2);
+}
+
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);
+}
+
+.close-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 5 15;
+    -fx-background-radius: 50%;
+    -fx-transition: all 0.2s ease;
+}
+
+.close-button:hover {
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-rotate: 90;
+}
+
+/* Main Content */
+.main-content {
+    -fx-background-color: transparent;
+}
+
+/* User Card */
+.user-card {
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #FAFBFC);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.5, 0, 2);
+    -fx-border-radius: 15;
+    -fx-border-color: #E4E6EB;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-transition: all 0.3s ease;
+}
+
+.user-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(18,66,161,0.2), 10, 0.5, 0, 3);
+    -fx-translate-y: -2;
+}
+
+.profile-section {
+    -fx-min-width: 180;
+    -fx-alignment: center;
+}
+
+.profile-image {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-color: #1242A1;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 0, 1);
+}
+
+.photo-button {
+    -fx-background-color: linear-gradient(to bottom, #1242A1, #0D3580);
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-padding: 8 15;
+    -fx-font-size: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
+    -fx-transition: all 0.2s ease;
+}
+
+.photo-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #1650C2, #1242A1);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0.5, 0, 2);
+    -fx-translate-y: -1;
+}
+
+.user-name {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1242A1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 1, 0.5, 0, 1);
+}
+
+.info-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #65676B;
+    -fx-min-width: 100;
+}
+
+.info-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #1E1E1E;
+}
+
+/* Edit Form */
+.edit-form {
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #FAFBFC);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.5, 0, 2);
+    -fx-border-radius: 15;
+    -fx-border-color: #E4E6EB;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-transition: all 0.3s ease;
+}
+
+.edit-form:hover {
+    -fx-effect: dropshadow(gaussian, rgba(18,66,161,0.15), 10, 0.5, 0, 3);
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1242A1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 1, 0.5, 0, 1);
+}
+
+.separator {
+    -fx-opacity: 0.7;
+    -fx-background-color: linear-gradient(to right, transparent, #D8DADF, transparent);
+    -fx-background-radius: 1;
+    -fx-padding: 5 0;
+}
+
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #65676B;
+}
+
+TextField, PasswordField {
+    -fx-background-color: linear-gradient(to bottom, #F5F7FA, #FFFFFF);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #E4E6EB;
+    -fx-border-width: 1;
+    -fx-padding: 10 15;
+    -fx-prompt-text-fill: #8B9DC3;
+    -fx-text-fill: #1E1E1E;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0.5, 0, 1);
+    -fx-transition: all 0.3s ease;
+}
+
+TextField:focused, PasswordField:focused {
+    -fx-background-color: #EEF3FF;
+    -fx-border-color: #1242A1;
+    -fx-effect: dropshadow(gaussian, rgba(18,66,161,0.15), 4, 0.5, 0, 0);
+}
+
+ComboBox {
+    -fx-background-color: linear-gradient(to bottom, #F5F7FA, #FFFFFF);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #E4E6EB;
+    -fx-border-width: 1;
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0.5, 0, 1);
+    -fx-transition: all 0.3s ease;
+    -fx-max-width: infinity;
+}
+
+ComboBox:focused {
+    -fx-background-color: #EEF3FF;
+    -fx-border-color: #1242A1;
+    -fx-effect: dropshadow(gaussian, rgba(18,66,161,0.15), 4, 0.5, 0, 0);
+}
+
+ComboBox .list-cell {
+    -fx-text-fill: #1E1E1E;
+    -fx-padding: 5 10;
+}
+
+ComboBox .list-view {
     -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #E4E6EB;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 2);
 }
 
-.text-field {
-    -fx-pref-width: 300px;
+ComboBox .list-cell:hover {
+    -fx-background-color: #EEF3FF;
+    -fx-text-fill: #1242A1;
 }
 
-.button {
+ComboBox .list-cell:selected {
     -fx-background-color: #1242A1;
     -fx-text-fill: white;
+}
+
+/* Action Buttons */
+.cancel-button {
+    -fx-background-color: linear-gradient(to bottom, #F0F2F5, #E4E6EB);
+    -fx-text-fill: #65676B;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #D8DADF;
+    -fx-border-width: 1;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.5, 0, 1);
+    -fx-transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #E4E6EB, #D8DADF);
+    -fx-text-fill: #050505;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
+    -fx-translate-y: -1;
+}
+
+.save-button {
+    -fx-background-color: linear-gradient(to bottom, #1242A1, #0D3580);
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
+    -fx-transition: all 0.2s ease;
+}
+
+.save-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #1650C2, #1242A1);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0.5, 0, 2);
+    -fx-translate-y: -1;
+}
+
+.save-button:pressed {
+    -fx-background-color: #0D3580;
+    -fx-translate-y: 1;
 }
