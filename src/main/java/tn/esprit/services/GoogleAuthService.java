@@ -35,8 +35,9 @@ public class GoogleAuthService {
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
     // Informations OAuth (à remplacer par vos propres valeurs)
-    private String clientId ="689140770366-3gqlqiagvej6gvkbir5gnfv6it94gdlt.apps.googleusercontent.com";
-    private String clientSecret="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";
+    String clientId = System.getenv("GOOGLE_OAUTH_CLIENT_ID");
+    String clientSecret = System.getenv("GOOGLE_OAUTH_CLIENT_SECRET");
+
     private String redirectUri = "urn:ietf:wg:oauth:2.0:oob"; // Redirection spéciale pour les applications de bureau
 
     // URLs OAuth de Google
