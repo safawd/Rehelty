@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="/ModifyAccount.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ModifyAccount">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="/ModifyAccount.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ModifyAccount">
     <children>
         <!-- Header -->
         <HBox alignment="CENTER_LEFT" layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="900.0" styleClass="header">
@@ -44,203 +45,207 @@
                 </HBox>
             </children>
         </HBox>
-
-        <!-- Main Content -->
-        <VBox layoutX="0.0" layoutY="80.0" prefHeight="620.0" prefWidth="900.0" spacing="20.0" styleClass="main-content">
-            <padding>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-            </padding>
-            <children>
-                <!-- User Card -->
-                <VBox styleClass="user-card">
-                    <children>
-                        <HBox alignment="CENTER" spacing="20.0">
-                            <!-- Profile Image Section -->
-                            <VBox alignment="CENTER" spacing="10.0" styleClass="profile-section">
-                                <ImageView fx:id="profileImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                                    <image>
-                                        <Image url="@/images/Logo.png" />
-                                    </image>
-                                </ImageView>
-                                <Button fx:id="btnChangePhoto" mnemonicParsing="false" onAction="#onChangePhotoClick" styleClass="photo-button" text="Changer la photo" />
-                            </VBox>
-
-                            <!-- User Info Section -->
-                            <VBox spacing="15.0" HBox.hgrow="ALWAYS">
-                                <HBox.margin>
-                                    <Insets left="20.0" />
-                                </HBox.margin>
-                                <children>
-                                    <Label fx:id="userNameLabel" styleClass="user-name" text="Prénom Nom">
-                                        <font>
-                                            <Font name="System Bold" size="24.0" />
-                                        </font>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                        <children>
-                                            <Label styleClass="info-label" text="Email:" />
-                                            <Label fx:id="emailLabel" styleClass="info-value" text="utilisateur@email.com" />
-                                        </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                        <children>
-                                            <Label styleClass="info-label" text="Téléphone:" />
-                                            <Label fx:id="phoneLabel" styleClass="info-value" text="+33 6 12 34 56 78" />
-                                        </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                        <children>
-                                            <Label styleClass="info-label" text="Pays:" />
-                                            <Label fx:id="countryLabel" styleClass="info-value" text="France" />
-                                        </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                        <children>
-                                            <Label styleClass="info-label" text="Type d'ID:" />
-                                            <Label fx:id="idTypeLabel" styleClass="info-value" text="Passeport" />
-                                        </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                        <children>
-                                            <Label styleClass="info-label" text="Numéro d'ID:" />
-                                            <Label fx:id="idNumberLabel" styleClass="info-value" text="AB123456" />
-                                        </children>
-                                    </HBox>
-                                </children>
-                            </VBox>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
-                </VBox>
-
-                <!-- Edit Form -->
-                <VBox spacing="15.0" styleClass="edit-form">
-                    <children>
-                        <Label styleClass="section-title" text="Modifier vos informations">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-
-                        <Separator styleClass="separator" />
-
-                        <!-- Personal Info -->
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Prénom" />
-                                        <TextField fx:id="firstNameField" promptText="Votre prénom" />
-                                    </children>
-                                </VBox>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Nom" />
-                                        <TextField fx:id="lastNameField" promptText="Votre nom" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Email" />
-                                        <TextField fx:id="emailField" promptText="Votre email" />
-                                    </children>
-                                </VBox>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Téléphone" />
-                                        <TextField fx:id="phoneField" promptText="Votre numéro de téléphone" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Pays" />
-                                        <ComboBox fx:id="countryComboBox" prefWidth="150.0" promptText="Sélectionnez votre pays" HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </VBox>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Type d'ID" />
-                                        <ComboBox fx:id="idTypeComboBox" prefWidth="150.0" promptText="Type de document d'identité" HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <VBox spacing="5.0">
-                            <children>
-                                <Label styleClass="field-label" text="Numéro d'ID" />
-                                <TextField fx:id="idNumberField" promptText="Numéro de votre document d'identité" />
-                            </children>
-                        </VBox>
-
-                        <!-- Password Change Section -->
-                        <Label styleClass="section-title" text="Modifier votre mot de passe">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets top="15.0" />
-                            </VBox.margin>
-                        </Label>
-
-                        <Separator styleClass="separator" />
-
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Mot de passe actuel" />
-                                        <PasswordField fx:id="currentPasswordField" promptText="Entrez votre mot de passe actuel" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <HBox spacing="15.0">
-                            <children>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Nouveau mot de passe" />
-                                        <PasswordField fx:id="newPasswordField" promptText="Entrez votre nouveau mot de passe" />
-                                    </children>
-                                </VBox>
-                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Confirmer le mot de passe" />
-                                        <PasswordField fx:id="confirmPasswordField" promptText="Confirmez votre nouveau mot de passe" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-
-                        <!-- Action Buttons -->
-                        <HBox alignment="CENTER_RIGHT" spacing="15.0">
-                            <children>
-                                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelClick" styleClass="cancel-button" text="Annuler" />
-                                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSaveClick" styleClass="save-button" text="Enregistrer les modifications" />
-                            </children>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </VBox>
+      <ScrollPane prefHeight="722.0" prefWidth="966.0">
+         <content>
+      
+              <!-- Main Content -->
+              <VBox prefHeight="620.0" prefWidth="900.0" spacing="20.0" styleClass="main-content">
+                  <padding>
+                      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                  </padding>
+                  <children>
+                      <!-- User Card -->
+                      <VBox styleClass="user-card">
+                          <children>
+                              <HBox alignment="CENTER" spacing="20.0">
+                                  <!-- Profile Image Section -->
+                                  <VBox alignment="CENTER" spacing="10.0" styleClass="profile-section">
+                                      <ImageView fx:id="profileImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                                          <image>
+                                              <Image url="@/images/Logo.png" />
+                                          </image>
+                                      </ImageView>
+                                      <Button fx:id="btnChangePhoto" mnemonicParsing="false" onAction="#onChangePhotoClick" styleClass="photo-button" text="Changer la photo" />
+                                  </VBox>
+      
+                                  <!-- User Info Section -->
+                                  <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                                      <HBox.margin>
+                                          <Insets left="20.0" />
+                                      </HBox.margin>
+                                      <children>
+                                          <Label fx:id="userNameLabel" styleClass="user-name" text="Prénom Nom">
+                                              <font>
+                                                  <Font name="System Bold" size="24.0" />
+                                              </font>
+                                          </Label>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                              <children>
+                                                  <Label styleClass="info-label" text="Email:" />
+                                                  <Label fx:id="emailLabel" styleClass="info-value" text="utilisateur@email.com" />
+                                              </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                              <children>
+                                                  <Label styleClass="info-label" text="Téléphone:" />
+                                                  <Label fx:id="phoneLabel" styleClass="info-value" text="+33 6 12 34 56 78" />
+                                              </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                              <children>
+                                                  <Label styleClass="info-label" text="Pays:" />
+                                                  <Label fx:id="countryLabel" styleClass="info-value" text="France" />
+                                              </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                              <children>
+                                                  <Label styleClass="info-label" text="Type d'ID:" />
+                                                  <Label fx:id="idTypeLabel" styleClass="info-value" text="Passeport" />
+                                              </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                              <children>
+                                                  <Label styleClass="info-label" text="Numéro d'ID:" />
+                                                  <Label fx:id="idNumberLabel" styleClass="info-value" text="AB123456" />
+                                              </children>
+                                          </HBox>
+                                      </children>
+                                  </VBox>
+                              </HBox>
+                          </children>
+                          <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                          </padding>
+                      </VBox>
+      
+                      <!-- Edit Form -->
+                      <VBox spacing="15.0" styleClass="edit-form">
+                          <children>
+                              <Label styleClass="section-title" text="Modifier vos informations">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+      
+                              <Separator styleClass="separator" />
+      
+                              <!-- Personal Info -->
+                              <HBox spacing="15.0">
+                                  <children>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Prénom" />
+                                              <TextField fx:id="firstNameField" promptText="Votre prénom" />
+                                          </children>
+                                      </VBox>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Nom" />
+                                              <TextField fx:id="lastNameField" promptText="Votre nom" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </HBox>
+      
+                              <HBox spacing="15.0">
+                                  <children>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Email" />
+                                              <TextField fx:id="emailField" promptText="Votre email" />
+                                          </children>
+                                      </VBox>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Téléphone" />
+                                              <TextField fx:id="phoneField" promptText="Votre numéro de téléphone" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </HBox>
+      
+                              <HBox spacing="15.0">
+                                  <children>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Pays" />
+                                              <ComboBox fx:id="countryComboBox" prefWidth="150.0" promptText="Sélectionnez votre pays" HBox.hgrow="ALWAYS" />
+                                          </children>
+                                      </VBox>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Type d'ID" />
+                                              <ComboBox fx:id="idTypeComboBox" prefWidth="150.0" promptText="Type de document d'identité" HBox.hgrow="ALWAYS" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </HBox>
+      
+                              <VBox spacing="5.0">
+                                  <children>
+                                      <Label styleClass="field-label" text="Numéro d'ID" />
+                                      <TextField fx:id="idNumberField" promptText="Numéro de votre document d'identité" />
+                                  </children>
+                              </VBox>
+      
+                              <!-- Password Change Section -->
+                              <Label styleClass="section-title" text="Modifier votre mot de passe">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                                  <VBox.margin>
+                                      <Insets top="15.0" />
+                                  </VBox.margin>
+                              </Label>
+      
+                              <Separator styleClass="separator" />
+      
+                              <HBox spacing="15.0">
+                                  <children>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Mot de passe actuel" />
+                                              <PasswordField fx:id="currentPasswordField" promptText="Entrez votre mot de passe actuel" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </HBox>
+      
+                              <HBox spacing="15.0">
+                                  <children>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Nouveau mot de passe" />
+                                              <PasswordField fx:id="newPasswordField" promptText="Entrez votre nouveau mot de passe" />
+                                          </children>
+                                      </VBox>
+                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                          <children>
+                                              <Label styleClass="field-label" text="Confirmer le mot de passe" />
+                                              <PasswordField fx:id="confirmPasswordField" promptText="Confirmez votre nouveau mot de passe" />
+                                          </children>
+                                      </VBox>
+                                  </children>
+                              </HBox>
+      
+                              <!-- Action Buttons -->
+                              <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                  <children>
+                                      <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelClick" styleClass="cancel-button" text="Annuler" />
+                                      <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSaveClick" styleClass="save-button" text="Enregistrer les modifications" />
+                                  </children>
+                                  <VBox.margin>
+                                      <Insets top="20.0" />
+                                  </VBox.margin>
+                              </HBox>
+                          </children>
+                          <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                          </padding>
+                      </VBox>
+                  </children>
+              </VBox>
+         </content>
+      </ScrollPane>
     </children>
 </AnchorPane>

@@ -12,17 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import tn.esprit.models.Personne;
 import tn.esprit.services.GoogleAuthService;
-import tn.esprit.services.GoogleAuthService.GoogleUser;
+import tn.esprit.services.MailService;
 import tn.esprit.services.ServicePersonne;
 import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 
@@ -68,10 +66,8 @@ public class GestionLogin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // Initialiser la connexion à la base de données
             connection = MyDataBase.getInstance().getCnx();
 
-            // Charger le logo de l'entreprise
             try {
                 Image logoImage = new Image(getClass().getResourceAsStream("/images/Logo.png"));
                 logoImageView.setImage(logoImage);
@@ -79,18 +75,15 @@ public class GestionLogin implements Initializable {
                 System.err.println("Impossible de charger le logo: " + e.getMessage());
             }
 
-            // Créer un champ de texte pour afficher le mot de passe en clair
             visiblePasswordField = new TextField();
             visiblePasswordField.setPromptText("Mot de passe");
             visiblePasswordField.setStyle("-fx-background-color: transparent;");
             visiblePasswordField.setManaged(false);
             visiblePasswordField.setVisible(false);
 
-            // Ajouter le champ de texte visible à côté du PasswordField
             HBox passwordContainer = (HBox) pfPassword.getParent();
             passwordContainer.getChildren().add(visiblePasswordField);
 
-            // Définir la description de REHELTY
             descriptionLabel.setText("Votre partenaire immobilier de confiance. Trouvez, achetez et gérez facilement vos biens immobiliers avec notre plateforme intuitive.");
 
         } catch (Exception e) {
@@ -99,57 +92,94 @@ public class GestionLogin implements Initializable {
         }
     }
 
-
     @FXML
     private void onLogin(ActionEvent event) {
         String email = tfEmail.getText().trim();
-        String password = passwordVisible ? visiblePasswordField.getText() : pfPassword.getText();
+        String password = pfPassword.getText();
 
+        // Vérifie si les champs sont vides
         if (email.isEmpty() || password.isEmpty()) {
             showError("Veuillez remplir tous les champs");
             return;
         }
 
+        // Vérifier si l'utilisateur est l'admin
+        if ("admin".equals(email) && "admin1234@".equals(password)) {
+            // Rediriger vers la page GestionAdmin.fxml
+            navigateToAdmin(event);
+            return;
+        }
+
+        // Vérifie l'utilisateur dans la base de données
+        Personne user = servicePersonne.getByEmailAndPassword(email, password);
+
+        if (user == null) {
+            showError("Email ou mot de passe incorrect");
+            return;
+        }
+
+        // Vérifier si l'utilisateur a un code de vérification
+        if (user.getVerificationCode() != null) {
+            // Générer un code de vérification
+            String verificationCode = servicePersonne.generateVerificationCode();
+
+            // Mettre à jour le code de vérification dans la base de données
+            servicePersonne.updateVerificationCode(user.getEmail(), verificationCode);
+
+            // Envoyer le code de vérification par email
+            sendVerificationEmail(user.getEmail(), verificationCode);
+
+            // Ouvrir la fenêtre pour saisir le code
+            openVerificationWindow(user);
+        } else {
+            // Si l'utilisateur est déjà vérifié, rediriger vers la page d'accueil
+            redirectToHome(event, user);
+        }
+    }
+
+
+    private void sendVerificationEmail(String email, String verificationCode) {
+        MailService mailService = new MailService();
+        mailService.sendVerificationEmail(email, verificationCode);
+    }
+
+    private void openVerificationWindow(Personne user) {
         try {
-            FXMLLoader loader;
-            Parent root;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CodeVerificationController.fxml"));
+            Parent root = loader.load();
 
-            if (email.equals("admin") && password.equals("admin")) {
-                // Connexion admin
-                loader = new FXMLLoader(getClass().getResource("/GestionAdmin.fxml"));
-                root = loader.load();
-                showSuccess("Connexion admin réussie!");
-            } else {
-                // Vérifie l'utilisateur en base
-                Personne user = servicePersonne.getByEmailAndPassword(email, password);
+            // Passer l'utilisateur à la fenêtre de vérification
+            CodeVerificationController controller = loader.getController();
+            controller.setUser(user);
 
-                if (user == null) {
-                    showError("Email ou mot de passe incorrect");
-                    return;
-                }
+            // Ouvrir la fenêtre
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
 
-                if (cbRememberMe.isSelected()) {
-                    saveLoginInfo(email);
-                }
+        } catch (IOException e) {
+            showError("Erreur lors du chargement de la fenêtre de vérification: " + e.getMessage());
+        }
+    }
 
-                // Connexion utilisateur normale
-                loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-                root = loader.load();
-                showSuccess("Connexion réussie!");
-            }
 
-            // Changer la scène
+
+    private void redirectToHome(ActionEvent event, Personne user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+            Parent root = loader.load();
+
+            // Passer l'objet Personne au contrôleur de Home
+            Home homeController = loader.getController();
+            homeController.setPersonne(user);
+
+            // Changer de scène vers Home
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
         } catch (IOException e) {
-            showError("Erreur lors du chargement de la page: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            showError("Erreur lors de la connexion: " + e.getMessage());
-            e.printStackTrace();
+            showError("Erreur lors du chargement de la page d'accueil: " + e.getMessage());
         }
     }
 
@@ -161,18 +191,14 @@ public class GestionLogin implements Initializable {
                 .thenAccept(googleUser -> {
                     Platform.runLater(() -> {
                         try {
-                            // Vérifier si l'utilisateur existe déjà dans la base de données
                             String userEmail = googleUser.getEmail();
                             Personne existingUser = servicePersonne.findByEmail(userEmail);
 
                             if (existingUser != null) {
-                                // L'utilisateur existe déjà, connectez-le directement
                                 showSuccess("Connexion réussie! Redirection vers l'accueil...");
                                 navigateToHome(event);
                             } else {
-                                // L'utilisateur n'existe pas, alerte et redirection
                                 showError("L'email associé à ce compte Google n'existe pas dans notre base de données.");
-                                // Optionnel: ajouter un bouton pour rediriger vers l'inscription ou autre action
                             }
                         } catch (Exception e) {
                             showError("Erreur lors de la connexion avec Google: " + e.getMessage());
@@ -189,13 +215,11 @@ public class GestionLogin implements Initializable {
                 });
     }
 
-
     @FXML
     private void onShowPassword(ActionEvent event) {
         passwordVisible = !passwordVisible;
 
         if (passwordVisible) {
-            // Afficher le mot de passe
             visiblePasswordField.setText(pfPassword.getText());
             visiblePasswordField.setLayoutX(pfPassword.getLayoutX());
             visiblePasswordField.setLayoutY(pfPassword.getLayoutY());
@@ -209,7 +233,6 @@ public class GestionLogin implements Initializable {
 
             btnShowPassword.setText("Masquer");
         } else {
-            // Masquer le mot de passe
             pfPassword.setText(visiblePasswordField.getText());
 
             pfPassword.setVisible(true);
@@ -218,21 +241,6 @@ public class GestionLogin implements Initializable {
             visiblePasswordField.setManaged(false);
 
             btnShowPassword.setText("Afficher");
-        }
-    }
-
-    @FXML
-    private void onForgotPassword(ActionEvent event) {
-        // Implémenter la fonctionnalité de récupération de mot de passe
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionResetPassword.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = ((Node) event.getSource()).getScene();
-            scene.setRoot(root);
-        } catch (IOException e) {
-            showError("Erreur lors du chargement de la page de récupération: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -263,32 +271,17 @@ public class GestionLogin implements Initializable {
         }
     }
 
-    private void navigateToSignup(ActionEvent event, GoogleUser googleUser) {
+    private void navigateToAdmin(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionSignup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionAdmin.fxml"));
             Parent root = loader.load();
-
-            // Récupérer le contrôleur d'inscription
-            GestionSignup signupController = loader.getController();
-
-            // Appeler la méthode pour définir les données Google
-            signupController.setGoogleUserData(googleUser);
 
             Scene scene = ((Node) event.getSource()).getScene();
             scene.setRoot(root);
         } catch (IOException e) {
-            showError("Erreur lors du chargement de la page d'inscription: " + e.getMessage());
+            showError("Erreur lors du chargement de la page d'accueil: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-
-    private void saveLoginInfo(String email) {
-        // Implémenter la sauvegarde des informations de connexion
-        // Par exemple, utiliser les préférences utilisateur
-        java.util.prefs.Preferences prefs = java.util.prefs.Preferences.userNodeForPackage(GestionLogin.class);
-        prefs.put("savedEmail", email);
-        prefs.putBoolean("rememberMe", true);
     }
 
     private void showError(String message) {
@@ -314,4 +307,61 @@ public class GestionLogin implements Initializable {
         alert.setContentText(message);
         alert.show();
     }
+
+    private String generateVerificationCode() {
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            code.append((int) (Math.random() * 10));
+        }
+        return code.toString();
+    }
+
+    @FXML
+    private void onForgotPassword(ActionEvent event) {
+        String email = tfEmail.getText().trim();
+
+        if (email.isEmpty()) {
+            showError("Veuillez entrer votre email.");
+            return;
+        }
+
+        Personne user = servicePersonne.findByEmail(email);
+        if (user == null) {
+            showError("Aucun utilisateur trouvé avec cet email.");
+            return;
+        }
+
+        String verificationCode = servicePersonne.generateVerificationCode();
+
+        servicePersonne.updateVerificationCode(email, verificationCode);
+
+        sendVerificationEmail(email, verificationCode);
+
+        openVerificationWindow(user);
+    }
+@FXML TextField verificationCodeField;
+    @FXML
+    private void verifyVerificationCode(ActionEvent event) {
+        String enteredCode = verificationCodeField.getText().trim();  // Récupérer le code saisi par l'utilisateur
+
+        if (enteredCode.isEmpty()) {
+            showError("Veuillez entrer le code de vérification.");
+            return;
+        }
+
+        // Récupérer l'email de l'utilisateur à partir du champ
+        String email = tfEmail.getText().trim();
+
+        // Vérifier le code dans la base de données
+        boolean isCodeValid = servicePersonne.verifyCode(email, enteredCode);
+
+        if (isCodeValid) {
+            showSuccess("Code de vérification correct !");
+            // Rediriger l'utilisateur vers la page d'accueil
+            redirectToHome(event, servicePersonne.findByEmail(email));  // Assurez-vous d'utiliser l'objet Personne
+        } else {
+            showError("Code incorrect. Essayez à nouveau.");
+        }
+    }
+
 }

@@ -451,3 +451,10 @@
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
 }
+
+.welcome-message {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1242A1;
+    -fx-padding: 10 0 10 20;
+}

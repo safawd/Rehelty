@@ -7,7 +7,7 @@ import tn.esprit.utils.MyDataBase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.Random;
 
 import static java.sql.Types.NULL;
 
@@ -43,7 +43,7 @@ public class ServicePersonne implements IServices<Personne> {
             pstm.setString(3, personne.getPrenom());
 
             // Si le numéro de téléphone est vide ou égal à 0, insérer NULL
-            if (personne.getTelephone() == 0 || personne.getTelephone()==NULL) {
+            if (personne.getTelephone() == 0 || personne.getTelephone() == NULL) {
                 pstm.setNull(4, Types.INTEGER);  // Met NULL pour le téléphone
             } else {
                 pstm.setInt(4, personne.getTelephone()); // Sinon, insérer la valeur du téléphone
@@ -231,7 +231,6 @@ public class ServicePersonne implements IServices<Personne> {
         return sb.toString();
     }
 
-
     public List<Personne> search(String query) {
         List<Personne> personnes = new ArrayList<>();
         String sql = "SELECT * FROM personne WHERE LOWER(nom) LIKE ? OR LOWER(prenom) LIKE ? OR LOWER(email) LIKE ?";
@@ -264,19 +263,52 @@ public class ServicePersonne implements IServices<Personne> {
         p.setPays(rs.getString("pays"));
         p.setIdType(rs.getString("idType"));
         p.setIdNumber(rs.getString("idNumber"));
-
-        try {
-            p.setGoogleUser(rs.getBoolean("isGoogleUser"));
-            p.setGoogleUserId(rs.getString("googleUserId"));
-        } catch (SQLException e) {
-            p.setGoogleUser(false);
-            p.setGoogleUserId(null);
-        }
-
+        p.setGoogleUser(rs.getBoolean("isGoogleUser"));
+        p.setGoogleUserId(rs.getString("googleUserId"));
+        p.setVerificationCode(rs.getString("verificationCode"));
         return p;
     }
 
-    // Statistiques
+    // Méthode pour générer un code de vérification aléatoire
+    public String generateVerificationCode() {
+        StringBuilder code = new StringBuilder();
+        Random rand = new Random();
+        for (int i = 0; i < 6; i++) {
+            code.append(rand.nextInt(10));  // Générer un chiffre aléatoire de 0 à 9
+        }
+        return code.toString();
+    }
+
+    // Mettre à jour le code de vérification dans la base de données
+    public void updateVerificationCode(String email, String verificationCode) {
+        String qry = "UPDATE personne SET verificationCode = ? WHERE email = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(qry);
+            pstm.setString(1, verificationCode);
+            pstm.setString(2, email);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour du code de vérification: " + e.getMessage());
+        }
+    }
+
+
+
+    public int getCountGoogleUsers() {
+        String sql = "SELECT COUNT(*) FROM personne WHERE isGoogleUser = true";
+        try (Statement stmt = cnx.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du comptage des utilisateurs Google: " + e.getMessage());
+        }
+        return 0;
+    }
+
+
+
     public int getCountRecentlyAdded() {
         String sql = "SELECT COUNT(*) FROM personne WHERE idPersonne > (SELECT MAX(idPersonne) - 10 FROM personne)";
         try (Statement stmt = cnx.createStatement();
@@ -290,10 +322,15 @@ public class ServicePersonne implements IServices<Personne> {
         return 0;
     }
 
+
     public int getCountRecentlyDeleted() {
         // Pour implémenter cette fonctionnalité, vous auriez besoin d'une table de journalisation
         // Voici une implémentation fictive
         return 0;
+    }
+
+    public Personne getCurrentUser(String email) {
+        return findByEmail(email); // Utilise la méthode findByEmail pour récupérer l'utilisateur par email
     }
 
     public double getTotalPaymentsAmount() {
@@ -302,21 +339,28 @@ public class ServicePersonne implements IServices<Personne> {
         return 0.0;
     }
 
-    /**
-     * Compte le nombre d'utilisateurs Google
-     * @return Le nombre d'utilisateurs Google
-     */
-    public int getCountGoogleUsers() {
-        String sql = "SELECT COUNT(*) FROM personne WHERE isGoogleUser = true";
-        try (Statement stmt = cnx.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+
+    public boolean verifyCode(String email, String enteredCode) {
+        String qry = "SELECT verificationCode FROM personne WHERE email = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(qry);
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+
             if (rs.next()) {
-                return rs.getInt(1);
+                String storedCode = rs.getString("verificationCode");
+                // Vérifier que le code stocké est le même que celui saisi par l'utilisateur
+                return storedCode != null && storedCode.equals(enteredCode);
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors du comptage des utilisateurs Google: " + e.getMessage());
+            System.out.println("Erreur lors de la vérification du code: " + e.getMessage());
         }
-        return 0;
+        return false;
     }
-}
 
+
+
+
+
+
+}

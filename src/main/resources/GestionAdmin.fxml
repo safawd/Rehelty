@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,16 +15,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="/Adminstyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.GestionAdmin">
     <children>
         <!-- Header -->
         <HBox prefHeight="60.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-                <Label styleClass="logo" text="Admin" />
+                <Label prefHeight="33.0" prefWidth="69.0" styleClass="logo" text="Admin" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="profileButton" styleClass="profile-button" text="Profile" />
             </children>
             <padding>
                 <Insets bottom="10" left="20" right="20" top="10" />
@@ -36,51 +36,69 @@
                 <HBox styleClass="toggle-button-container">
                     <Button fx:id="toggleSidebarButton" onAction="#toggleSidebar" styleClass="toggle-button" text="☰" />
                 </HBox>
-
-                <Label styleClass="sidebar-title" text="Admin Panel" />
                 <Separator styleClass="sidebar-separator" />
 
                 <!-- Sidebar items -->
                 <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
-                    <Label styleClass="sidebar-icon" text="📊">
-                        <font>
-                            <Font size="19.0" />
-                        </font>
-                    </Label>
+               <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/iconedashboard.png" />
+                  </image>
+               </ImageView>
                     <Button fx:id="refreshStatsButton" onAction="#refreshStats" styleClass="sidebar-button" text="Dashboard" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
-                    <Label styleClass="sidebar-icon" text="➕">
-                        <font>
-                            <Font size="17.0" />
-                        </font>
-                    </Label>
+               <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/reservationicon.png" />
+                  </image>
+               </ImageView>
                     <Button fx:id="GestionReservationButton" styleClass="sidebar-button" text="Réservation" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
-                    <Label styleClass="sidebar-icon" text="✏️">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Button fx:id="GestionPaimentButton" styleClass="sidebar-button" text="Réservation" />
+               <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/iconpaiement.png" />
+                  </image>
+               </ImageView>
+                    <Button fx:id="GestionPaimentButton" styleClass="sidebar-button" text="Paiement" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
-                    <Label styleClass="sidebar-icon" text="🗑️">
-                        <font>
-                            <Font size="21.0" />
-                        </font>
-                    </Label>
+               <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/iconesante.png" />
+                  </image>
+               </ImageView>
                     <Button fx:id="GestionSanteButton" styleClass="sidebar-button" text="Santé" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
-                    <Label styleClass="sidebar-icon" text="🚪">
-                        <font>
-                            <Font size="22.0" />
-                        </font>
-                    </Label>
-                    <Button fx:id="logoutButton" onAction="#logout" styleClass="sidebar-button" text="Sortir" />
+               <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/icontransport.png" />
+                  </image>
+               </ImageView>
+                    <Button fx:id="GestionTransportButton" styleClass="sidebar-button" text="Transport" />
                 </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/destinationicon.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="GestionDestinationButton1" styleClass="sidebar-button" text="Destination" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-item">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/iconlogout.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="logoutButton1" onAction="#logout" styleClass="sidebar-button" text="Sortir" />
+               </children>
+            </HBox>
             </children>
             <padding>
                 <Insets bottom="20" left="10" right="10" top="20" />
@@ -171,7 +189,7 @@
 
                             <!-- Search and People Grid -->
                             <VBox spacing="20">
-                                <TextField fx:id="searchField" onKeyTyped="#handleSearchInput" promptText="Search by ID..." styleClass="search-field" />
+                                <TextField fx:id="searchField" onKeyTyped="#handleSearchInput" promptText="Search by Username..." styleClass="search-field" />
                                 <VBox fx:id="personCardContainer" alignment="CENTER" spacing="10" styleClass="card-container" />
                                 <Label fx:id="searchStatusLabel" styleClass="message-label" text="" />
                                 <ScrollPane fx:id="peopleScrollPane" visible="false" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">

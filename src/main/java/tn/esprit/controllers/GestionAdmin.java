@@ -72,9 +72,9 @@ public class GestionAdmin {
         }
 
         try {
-            int id = Integer.parseInt(input);
+            // Recherche par prénom uniquement
             Personne person = servicePersonne.getAll().stream()
-                    .filter(p -> p.getIdPersonne() == id)
+                    .filter(p -> p.getPrenom().toLowerCase().contains(input.toLowerCase())) // Recherche uniquement par prénom
                     .findFirst()
                     .orElse(null);
 
@@ -104,8 +104,8 @@ public class GestionAdmin {
                 searchStatusLabel.setText("Person not found.");
                 searchStatusLabel.setStyle("-fx-text-fill: #FF4444;");
             }
-        } catch (NumberFormatException e) {
-            searchStatusLabel.setText("Please enter a valid ID.");
+        } catch (Exception e) {
+            searchStatusLabel.setText("Error in search.");
             searchStatusLabel.setStyle("-fx-text-fill: #FF4444;");
         }
     }

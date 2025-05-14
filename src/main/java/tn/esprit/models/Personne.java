@@ -12,6 +12,7 @@ public class Personne {
     private String idNumber;
     private boolean isGoogleUser;
     private String googleUserId;
+    private String verificationCode;
 
     // Constructeurs
     public Personne() {
@@ -104,6 +105,13 @@ public class Personne {
 
     public void setGoogleUserId(String googleUserId) {
         this.googleUserId = googleUserId;
+    }
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override

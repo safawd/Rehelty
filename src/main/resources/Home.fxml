@@ -16,24 +16,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Home" >
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Home">
 
     <!-- HEADER -->
-    <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0"
-          style="-fx-background-color: #1242A1; -fx-padding: 0 20;"
-          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Label text="Rehelty" styleClass="header-title" />
-        <TextField promptText="Rechercher une destination..." styleClass="search-field" HBox.hgrow="ALWAYS" />
-        <Pane HBox.hgrow="ALWAYS" />
-        <Button text="S'inscrire" styleClass="header-button" />
-        <Button text="Connexion" styleClass="header-button" />
-        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-            <Image url="@/images/Logo.png" />
-        </ImageView>
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0" style="-fx-background-color: #1242A1; -fx-padding: 0 20;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="64.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Logo.png" />
+         </image>
+      </ImageView>
+        <Pane prefHeight="64.0" prefWidth="934.0" HBox.hgrow="ALWAYS">
+         <children>
+              <Label layoutX="-1.0" layoutY="22.0" styleClass="header-title" text="Rehelty" />
+         </children></Pane>
+        <Button fx:id="Deconnexiondelapagehome" onAction="#Hometologin" styleClass="header-button" text="Deconnexion" />
     </HBox>
 
     <!-- MENU -->
-    <MenuBar layoutY="60.0" prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" styleClass="custom-menu-bar">
+    <MenuBar layoutY="60.0" prefHeight="40.0" styleClass="custom-menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Menu text="Accueil" />
         <Menu text="Réservation" />
         <Menu text="Paiement" />
@@ -48,7 +48,14 @@
     <!-- MAIN CONTENT -->
     <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <!-- Bouton pour modifier le profil -->
+        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
 
+            <!-- Afficher le message de bienvenue -->
+            <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="80.0" styleClass="welcome-message" />
+
+            <!-- CONTENU DU RESTE DE LA PAGE -->
+            <!-- ... -->
+        </AnchorPane>
 
         <!-- LEFT SIDEBAR -->
         <VBox prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -59,80 +66,75 @@
             <!-- User Profile -->
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                    <Image url="@/images/Logo.png" />
+                    <Image url="@images/user.png" />
                 </ImageView>
-                <Label text="Nom d'utilisateur" styleClass="sidebar-text" />
+                <Label fx:id="nomutilisateurpagehome" styleClass="sidebar-text" text="Nom d'utilisateur" />
             </HBox>
 
             <Separator styleClass="sidebar-separator" />
 
             <!-- Navigation Items -->
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
-                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
+                <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/tabdebordicon.png" />
                 </ImageView>
-                <Label text="Tableau de bord" styleClass="sidebar-text" />
+                <Label styleClass="sidebar-text" text="Tableau de bord" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
+                <ImageView fitHeight="33.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/reserv.png" />
+                </ImageView>
+                <Label styleClass="sidebar-text" text="Mes réservations" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
+                <ImageView fitHeight="35.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/favoris.png" />
+                </ImageView>
+                <Label styleClass="sidebar-text" text="Favoris" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@/images/Logo.png" />
                 </ImageView>
-                <Label text="Mes réservations" styleClass="sidebar-text" />
+   
+               <Separator styleClass="sidebar-separator" />
+            </HBox>
+
+            <Label styleClass="sidebar-section-title" text="Raccourcis" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
+                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/hotel.png" />
+                </ImageView>
+                <Label fx:id="interfacedalirecherchehotel" styleClass="sidebar-text" text="Hôtels populaires" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
+                    <Image url="@images/vol.png" />
                 </ImageView>
-                <Label text="Favoris" styleClass="sidebar-text" />
+                <Label fx:id="versvolemna" styleClass="sidebar-text" text="Vols directs" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
+                    <Image url="@images/transport.png" />
                 </ImageView>
-                <Label text="Historique" styleClass="sidebar-text" />
-            </HBox>
-
-            <Separator styleClass="sidebar-separator" />
-
-            <Label text="Raccourcis" styleClass="sidebar-section-title" />
-
-            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
-                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
-                </ImageView>
-                <Label text="Hôtels populaires" styleClass="sidebar-text" />
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
-                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
-                </ImageView>
-                <Label text="Vols directs" styleClass="sidebar-text" />
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-item">
-                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
-                </ImageView>
-                <Label text="Promotions" styleClass="sidebar-text" />
+                <Label fx:id="versbus" styleClass="sidebar-text" text="Transport" />
             </HBox>
         </VBox>
 
         <!-- CENTER CONTENT -->
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
             <VBox spacing="20.0" styleClass="content-container">
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
 
-                <Button fx:id="btnEditProfile"
-                        text="Modifier mon profil"
-                        onAction="#onEditProfileClick"
-                        styleClass="profile-button"/>
+                <Button fx:id="btnEditProfile" onAction="#onEditProfileClick" styleClass="profile-button" text="Modifier mon profil" />
 
                 <!-- Create Post Section -->
                 <VBox styleClass="post-creation-box">
@@ -146,49 +148,49 @@
                     <Separator styleClass="post-separator" />
 
                     <HBox alignment="CENTER" spacing="20.0">
-                        <Button text="Photos/Vidéos" styleClass="post-action-button" />
-                        <Button text="Destination" styleClass="post-action-button" />
-                        <Button text="Évaluation" styleClass="post-action-button" />
+                        <Button styleClass="post-action-button" text="Photos/Vidéos" />
+                        <Button styleClass="post-action-button" text="Destination" />
+                        <Button styleClass="post-action-button" text="Évaluation" />
                     </HBox>
                 </VBox>
 
                 <!-- Stories Section -->
-                <Label text="Destinations populaires" styleClass="section-title" />
+                <Label styleClass="section-title" text="Destinations populaires" />
 
                 <HBox spacing="15.0" styleClass="stories-container">
-                    <VBox styleClass="story-item">
-                        <ImageView fitHeight="180.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
-                            <Image url="@/images/Logo.png" />
+                    <VBox prefHeight="166.0" prefWidth="150.0" styleClass="story-item">
+                        <ImageView fitHeight="161.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
+                            <Image url="@images/tunis.jpg" />
                         </ImageView>
-                        <Label text="Paris" styleClass="story-title" />
+                        <Label styleClass="story-title" text="Tunis" />
+                    </VBox>
+
+                    <VBox styleClass="story-item">
+                        <ImageView fitHeight="192.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
+                            <Image url="@images/hammamet.jpg" />
+                        </ImageView>
+                        <Label styleClass="story-title" text="Hammamet" />
                     </VBox>
 
                     <VBox styleClass="story-item">
                         <ImageView fitHeight="180.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
-                            <Image url="@/images/Logo.png" />
+                            <Image url="@images/djerba.jpg" />
                         </ImageView>
-                        <Label text="Tokyo" styleClass="story-title" />
+                        <Label styleClass="story-title" text="Djerba" />
                     </VBox>
 
                     <VBox styleClass="story-item">
                         <ImageView fitHeight="180.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
-                            <Image url="@/images/Logo.png" />
+                            <Image url="@images/douz.jpg" />
                         </ImageView>
-                        <Label text="New York" styleClass="story-title" />
+                        <Label styleClass="story-title" text="Douz" />
                     </VBox>
 
                     <VBox styleClass="story-item">
-                        <ImageView fitHeight="180.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
-                            <Image url="@/images/Logo.png" />
+                        <ImageView fitHeight="162.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
+                            <Image url="@images/aindrahem.jpg" />
                         </ImageView>
-                        <Label text="Dubai" styleClass="story-title" />
-                    </VBox>
-
-                    <VBox styleClass="story-item">
-                        <ImageView fitHeight="180.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="story-image">
-                            <Image url="@/images/Logo.png" />
-                        </ImageView>
-                        <Label text="Rome" styleClass="story-title" />
+                        <Label styleClass="story-title" text="Ain Drahem" />
                     </VBox>
                 </HBox>
 
@@ -196,52 +198,52 @@
                 <VBox styleClass="post-container">
                     <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="post-header">
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                            <Image url="@/images/Logo.png" />
+                            <Image url="@images/harry.jpg" />
                         </ImageView>
                         <VBox>
-                            <Label text="Sophie Martin" styleClass="post-author" />
-                            <Label text="Il y a 2 heures • Voyage à Bali" styleClass="post-time" />
+                            <Label styleClass="post-author" text="Harry styles" />
+                            <Label styleClass="post-time" text="Il y a 2 heures • Voyage en Tunisie" />
                         </VBox>
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Button text="..." styleClass="post-menu-button" />
+                        <Button styleClass="post-menu-button" text="..." />
                     </HBox>
 
-                    <Label text="Magnifique séjour à Bali ! Je recommande vivement l'hôtel Sunrise Resort, le service était impeccable et la vue sur l'océan à couper le souffle." styleClass="post-content" wrapText="true" />
+                    <Label styleClass="post-content" text="Magnifique séjour à Hammamet! Je recommande vivement l'hôtel Iberostar, le service était impeccable et la vue sur l'océan à couper le souffle." wrapText="true" />
 
                     <ImageView fitWidth="600.0" pickOnBounds="true" preserveRatio="true" styleClass="post-image">
-                        <Image url="@/images/Logo.png" />
+                        <Image url="@/images/hammametharry.jpg" />
                     </ImageView>
 
                     <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="post-actions">
-                        <Button text="❤️ J'aime • 128" styleClass="post-action-button" />
-                        <Button text="💬 Commenter • 24" styleClass="post-action-button" />
-                        <Button text="🔄 Partager • 12" styleClass="post-action-button" />
+                        <Button styleClass="post-action-button" text="❤️ J'aime • 128" />
+                        <Button styleClass="post-action-button" text="💬 Commenter • 24" />
+                        <Button styleClass="post-action-button" text="🔄 Partager • 12" />
                     </HBox>
                 </VBox>
 
                 <VBox styleClass="post-container">
                     <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="post-header">
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                            <Image url="@/images/Logo.png" />
+                            <Image url="@images/niall.jpg" />
                         </ImageView>
                         <VBox>
-                            <Label text="Thomas Dubois" styleClass="post-author" />
-                            <Label text="Hier • Voyage à Barcelone" styleClass="post-time" />
+                            <Label styleClass="post-author" text="Niall Horan" />
+                            <Label styleClass="post-time" text="Hier • Voyage en Tunisie" />
                         </VBox>
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Button text="..." styleClass="post-menu-button" />
+                        <Button styleClass="post-menu-button" text="..." />
                     </HBox>
 
-                    <Label text="Week-end à Barcelone : entre architecture Gaudi, tapas et plage. La Sagrada Familia est vraiment impressionnante, même en travaux !" styleClass="post-content" wrapText="true" />
+                    <Label styleClass="post-content" text="Week-end à Djerba : Djerba est une île ensoleillée de Tunisie, réputée pour ses plages paisibles, son charme traditionnel et son ambiance chaleureuse." wrapText="true" />
 
                     <ImageView fitWidth="600.0" pickOnBounds="true" preserveRatio="true" styleClass="post-image">
-                        <Image url="@/images/Logo.png" />
+                        <Image url="@/images/djerbaniall.jpg" />
                     </ImageView>
 
                     <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="post-actions">
-                        <Button text="❤️ J'aime • 85" styleClass="post-action-button" />
-                        <Button text="💬 Commenter • 16" styleClass="post-action-button" />
-                        <Button text="🔄 Partager • 7" styleClass="post-action-button" />
+                        <Button styleClass="post-action-button" text="❤️ J'aime • 85" />
+                        <Button styleClass="post-action-button" text="💬 Commenter • 16" />
+                        <Button styleClass="post-action-button" text="🔄 Partager • 7" />
                     </HBox>
                 </VBox>
             </VBox>
@@ -254,38 +256,38 @@
             </padding>
 
             <!-- Sponsored Content -->
-            <Label text="Sponsorisé" styleClass="sidebar-section-title" />
+            <Label styleClass="sidebar-section-title" text="Sponsorisé" />
 
             <VBox styleClass="sponsored-item">
                 <ImageView fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
+                    <Image url="@/images/sponsor.jpg" />
                 </ImageView>
-                <Label text="Offre spéciale : -30% sur les vols vers l'Europe" styleClass="sponsored-title" />
-                <Label text="flyair.com" styleClass="sponsored-link" />
+                <Label styleClass="sponsored-title" text="Offre spéciale : -30% sur les vols vers la Tunisie" />
+                <Label styleClass="sponsored-link" />
             </VBox>
 
             <VBox styleClass="sponsored-item">
                 <ImageView fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@/images/Logo.png" />
+                    <Image url="@/images/sponsor2.jpg" />
                 </ImageView>
-                <Label text="Découvrez nos forfaits tout inclus aux Caraïbes" styleClass="sponsored-title" />
-                <Label text="luxuryresorts.com" styleClass="sponsored-link" />
+                <Label styleClass="sponsored-title" text="Découvrez nos forfaits tout inclus " />
+                <Label styleClass="sponsored-link" />
             </VBox>
 
             <Separator styleClass="sidebar-separator" />
 
             <!-- Upcoming Events -->
-            <Label text="Événements à venir" styleClass="sidebar-section-title" />
+            <Label styleClass="sidebar-section-title" text="Événements à venir" />
 
             <VBox styleClass="event-item">
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <VBox styleClass="event-date">
-                        <Label text="25" styleClass="event-day" />
-                        <Label text="MAI" styleClass="event-month" />
+                        <Label styleClass="event-day" text="25" />
+                        <Label styleClass="event-month" text="MAI" />
                     </VBox>
                     <VBox>
-                        <Label text="Salon du Tourisme" styleClass="event-title" />
-                        <Label text="Paris Expo Porte de Versailles" styleClass="event-location" />
+                        <Label styleClass="event-title" text="Salon du Tourisme" />
+                        <Label styleClass="event-location" text="Tunisie" />
                     </VBox>
                 </HBox>
             </VBox>
@@ -293,12 +295,12 @@
             <VBox styleClass="event-item">
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <VBox styleClass="event-date">
-                        <Label text="10" styleClass="event-day" />
-                        <Label text="JUIN" styleClass="event-month" />
+                        <Label styleClass="event-day" text="10" />
+                        <Label styleClass="event-month" text="JUIN" />
                     </VBox>
                     <VBox>
-                        <Label text="Festival des Cultures du Monde" styleClass="event-title" />
-                        <Label text="Place de la République" styleClass="event-location" />
+                        <Label styleClass="event-title" text="Cité de la culture" />
+                        <Label styleClass="event-location" text="Place de la République" />
                     </VBox>
                 </HBox>
             </VBox>
@@ -307,36 +309,37 @@
 
             <!-- Contacts -->
             <HBox alignment="CENTER_LEFT">
-                <Label text="Contacts" styleClass="sidebar-section-title" HBox.hgrow="ALWAYS" />
-                <Button text="🔍" styleClass="icon-button" />
-                <Button text="⋯" styleClass="icon-button" />
+                <Label styleClass="sidebar-section-title" text="Contacts" HBox.hgrow="ALWAYS" />
+                <Button styleClass="icon-button" text="🔍" />
+                <Button styleClass="icon-button" text="⋯" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="contact-item">
                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
                     <Image url="@/images/Logo.png" />
                 </ImageView>
-                <Label text="Marie Dupont" styleClass="contact-name" />
+                <Label styleClass="contact-name" text="Marie Dupont" />
                 <Pane HBox.hgrow="ALWAYS" />
-                <Label text="●" styleClass="online-indicator" />
+                <Label styleClass="online-indicator" text="●" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="contact-item">
                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
                     <Image url="@/images/Logo.png" />
                 </ImageView>
-                <Label text="Antoine Bernard" styleClass="contact-name" />
+                <Label styleClass="contact-name" text="Antoine Bernard" />
                 <Pane HBox.hgrow="ALWAYS" />
-                <Label text="●" styleClass="online-indicator" />
+                <Label styleClass="online-indicator" text="●" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="contact-item">
                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
                     <Image url="@/images/Logo.png" />
                 </ImageView>
-                <Label text="Julie Moreau" styleClass="contact-name" />
+                <Label styleClass="contact-name" text="Julie Moreau" />
                 <Pane HBox.hgrow="ALWAYS" />
-                <Label text="●" styleClass="online-indicator" />
+                <Label styleClass="online-indicator" text="●" />
+
             </HBox>
         </VBox>
     </AnchorPane>
